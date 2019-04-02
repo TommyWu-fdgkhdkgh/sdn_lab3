@@ -1,4 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" immediate="true" name="nctu.winlab.testapp.AppComponent" activate="activate" deactivate="deactivate">
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" immediate="true" name="nctu.winlab.testapp.AppComponent" activate="activate" deactivate="deactivate" modified="modified">
+    <property name="packetOutOnly" type="Boolean" value="false"/>
+    <property name="packetOutOfppTable" type="Boolean" value="false"/>
+    <property name="flowTimeout" type="Integer" value="100000"/>
+    <property name="flowPriority" type="Integer" value="100000"/>
+    <property name="ipv6Forwarding" type="Boolean" value="false"/>
+    <property name="matchDstMacOnly" type="Boolean" value="false"/>
+    <property name="matchVlanId" type="Boolean" value="false"/>
+    <property name="matchIpv4Address" type="Boolean" value="true"/>
+    <property name="matchIpv4Dscp" type="Boolean" value="false"/>
+    <property name="matchIpv6Address" type="Boolean" value="false"/>
+    <property name="matchIpv6FlowLabel" type="Boolean" value="false"/>
+    <property name="matchTcpUdpPorts" type="Boolean" value="true"/>
+    <property name="matchIcmpFields" type="Boolean" value="true"/>
+    <property name="ignoreIPv4Multicast" type="Boolean" value="false"/>
+    <property name="recordMetrics" type="Boolean" value="false"/>
+    <service servicefactory="false">
+        <provide interface="nctu.winlab.testapp.AppComponent"/>
+    </service>
+    <reference name="coreService" interface="org.onosproject.core.CoreService" cardinality="1..1" policy="static" bind="bindCoreService" unbind="unbindCoreService"/>
+    <reference name="packetService" interface="org.onosproject.net.packet.PacketService" cardinality="1..1" policy="static" bind="bindPacketService" unbind="unbindPacketService"/>
+    <reference name="flowRuleService" interface="org.onosproject.net.flow.FlowRuleService" cardinality="1..1" policy="static" bind="bindFlowRuleService" unbind="unbindFlowRuleService"/>
+    <reference name="flowObjectiveService" interface="org.onosproject.net.flowobjective.FlowObjectiveService" cardinality="1..1" policy="static" bind="bindFlowObjectiveService" unbind="unbindFlowObjectiveService"/>
+    <reference name="cfgService" interface="org.onosproject.cfg.ComponentConfigService" cardinality="1..1" policy="static" bind="bindCfgService" unbind="unbindCfgService"/>
     <implementation class="nctu.winlab.testapp.AppComponent"/>
 </scr:component>
